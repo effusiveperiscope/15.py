@@ -2,6 +2,7 @@ import frequest as frq
 from io import BytesIO
 from getch import getch 
 import subprocess
+from fchars import match_character
 
 opts = {
     "character": frq.DEFAULT_CHARACTER,
@@ -54,8 +55,12 @@ def run():
                     " or acronym: ")
                 if not txt:
                     print("Character name unchanged: "+opts["character"])
-                else:
-                    opts["character"] = txt;
+                    continue
+                txt = match_character(txt)
+                if not txt:
+                    print ("Invalid character name")
+                    continue
+                opts["character"] = txt;
                 print("Character set: "+opts["character"])
                 continue
             elif key == "c":

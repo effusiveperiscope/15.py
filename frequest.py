@@ -1,6 +1,7 @@
 import requests
 import logging
 import json
+from fchars import match_character
 from requests.exceptions import ConnectionError
 
 # Constants
@@ -31,6 +32,10 @@ def get_raw(character, emotion, text, url = DEFAULT_API_URL):
     data = json.dumps({"text":text,"character":character,
         "emotion":emotion,"use_diagonal":True})
 
+    character = match_character(character)
+    if character == None:
+        raise Exception("Character does not match a known character")
+
     if len(text) > MAX_TEXT_LEN:
         logging.warning("Warning - text too long. Trimming.")
         text = text[:MAX_TEXT_LEN - 1]
@@ -47,7 +52,7 @@ def get_raw(character, emotion, text, url = DEFAULT_API_URL):
         response = requests.post(url, data=data, headers=REQ_HEADERS)
     except requests.exceptions.ConnectionError as e:
         logging.error(f"ConnectionError ({e})")
-        return None
+        raise 
 
     if response.status_code == 200:
         logging.info("API response success")
@@ -57,7 +62,7 @@ def get_raw(character, emotion, text, url = DEFAULT_API_URL):
             logging.error(f"JSON loading error ({e})")
     else:
         logging.error(f"API returned error code ({response.status_code})")
-        return None
+        raise
 
 def prefetch(response):
     ret = []
@@ -66,7 +71,7 @@ def prefetch(response):
             r = requests.get(DEFAULT_CDN_URL + w)
         except requests.exceptions.ConnectionError as e:
             logging.error(f"ConnectionError ({e})")
-            return None
+            raise
         # Why doesn't ret[i] = r.content work?
         ret.append(r.content)
     return ret
