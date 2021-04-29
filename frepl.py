@@ -51,7 +51,7 @@ def run():
                 break
             elif key == "C":
                 txt = input("Please enter a character name"
-                    "or acronym: ")
+                    " or acronym: ")
                 if not txt:
                     print("Character name unchanged: "+opts["character"])
                 else:
