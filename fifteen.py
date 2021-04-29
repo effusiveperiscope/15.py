@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # Python's where it's at. You can do almost anything with it. Did you know tha
 # python -m pip install requests
 import argparse
