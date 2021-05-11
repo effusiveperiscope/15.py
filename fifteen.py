@@ -21,5 +21,4 @@ frepl.run()
 
 #TODO input sanitizing (nonzero input length, ARPAbet)
 #TODO add TUI mode
-#TODO add character shorthands
 #TODO proper packaging (requests, getch)

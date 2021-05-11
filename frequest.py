@@ -6,7 +6,7 @@ from requests.exceptions import ConnectionError
 
 # Constants
 DEFAULT_API_URL = "http://api.15.ai/app/getAudioFile4"
-DEFAULT_AI_URL = "http://test16.15.ai"
+DEFAULT_AI_URL = "http://test000.15.ai"
 DEFAULT_CDN_URL = "http://cdn.15.ai/audio/"
 MAX_TEXT_LEN = 200
 FILENAME_TRUNC_LEN = 32
